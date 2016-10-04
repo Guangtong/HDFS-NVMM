@@ -1,0 +1,17 @@
+
+
+1) what is the problem you want to solve in your project, 
+2) why is this problem important, 
+3) what's the challenge of this project; 
+4) what's your overall approach to solve this problem; 
+5) what you plan to do specifically in your project;
+
+add an appendix to :
+provide a timeline and milestones of your project
+list your hardware/OS/VM/environment requirement 
+(e.g., 	do you need to work on native OS or is VM OK? 
+	what type of user account do you need? 
+	do you need root?) during development period and the hardware/OS/VM/environment requirement during experiment period. 
+
+Appendix does not count towards the total length of your proposal. 
+limit the project proposal length to within 2 pages (10pts minimal).
