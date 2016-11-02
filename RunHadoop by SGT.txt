@@ -1,0 +1,40 @@
+============ The compiled output =============
+Find the compiled bins in .../hadoop-2.7.3/hadoop-dist/target/hadoop-2.7.3, 
+just the same as the bin version online
+
+============Run Hadoop on single machine =============
+1. Refer to the link for standalone or pseudo-distributed deployment:
+http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/SingleCluster.html
+
+Note: need install ssh server!
+$ sudo apt-get install openssh-server
+
+
+2. A Chinese guide which can work: http://www.powerxing.com/install-hadoop/
+
+============Run Hadoop on cluster =============
+http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/ClusterSetup.html
+
+
+==========Run some commands and read fsimage and editlog ===========
+
+http://www.powerxing.com/install-hadoop/
+has examples on files moving in and out.
+
+1. output fsimage:
+./bin/hdfs oiv -i [path of fsimage] -o fsimage_output.txt
+
+[path of fsimage] is for example
+/tmp/hadoop-username/dfs/name/current/fsimage_0000000000000000000
+
+(may be empty, since not merged with editlog yet)
+
+2. output editlog:
+
+./bin/hdfs oev -i [path of editlog] -o editlog.xml
+[path of editlog] is for example
+/tmp/hadoop-username/dfs/name/current/edits_0000000000000000057-0000000000000000058
+
+./bin/hdfs oev -i /tmp/hadoop-sgt/dfs/name/current/edits_0000000000000000057-0000000000000000058 -o editlog.xml
+
+

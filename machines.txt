@@ -1,0 +1,8 @@
+wuklabvm[14-19].ecn.purdue.edu
+password:NjZk@NTQ3
+root: 695
+
+SSD
+14: intel lowend
+15: sumsung highend
+16-19: 5 medium

@@ -1,0 +1,84 @@
+========Install Software========
+Installing required packages for clean install of Ubuntu 14.04 LTS Desktop:
+
+* Oracle JDK 1.8 (preferred)
+  $ sudo apt-get purge openjdk*
+  $ sudo apt-get install software-properties-common
+  $ sudo add-apt-repository ppa:webupd8team/java
+  $ sudo apt-get update
+  $ sudo apt-get install oracle-java8-installer
+  
+  config JAVA_HOME
+  $ sudo gedit /etc/environment
+    Add this line:
+    JAVA_HOME="/usr/lib/jvm/java-8-oracle"
+
+* Maven
+  $ sudo apt-get -y install maven
+* Native libraries
+  $ sudo apt-get -y install build-essential autoconf automake libtool cmake zlib1g-dev pkg-config libssl-dev
+* ProtocolBuffer 2.5.0 (required)
+  $ sudo apt-get -y install libprotobuf-dev protobuf-compiler
+* Findbugs
+  Goto /usr/share/  (You can also put it to /usr/local/)
+  $ sudo wget  http://downloads.sourceforge.net/project/findbugs/findbugs/3.0.1/findbugs-3.0.1.zip
+  $ sudo unzip findbugs-3.0.1.zip
+	
+  config FINDBUGS_HOME:
+  $ sudo gedit /etc/environment 
+  export FINDBUGS_HOME=/usr/share/findbugs-3.0.1
+  export PATH=$PATH:$FINDBUGS_HOME/bin
+  $ source /etc/environment 
+  
+  
+Optional packages:
+
+* Snappy compression
+  $ sudo apt-get install snappy libsnappy-dev
+* Bzip2
+  $ sudo apt-get install bzip2 libbz2-dev
+* Jansson (C Library for JSON)
+  $ sudo apt-get install libjansson-dev
+* Linux FUSE
+  $ sudo apt-get install fuse libfuse-dev
+  
+  
+=========Download Hadoop Source=========
+
+I put it at ~/Projects/
+wget http://apache.mirrors.tds.net/hadoop/common/hadoop-2.7.3/hadoop-2.7.3-src.tar.gz
+tar zxvf hadoop-2.7.3-src.tar.gz
+
+
+
+============Building =====================
+Install hadoop-maven-plugins at first.
+Go to ~/Projects/hadoop-2.7.3-src, then
+  $ cd hadoop-maven-plugins
+  $ mvn install
+
+You can build the whole system, or a submodule.
+run 'mvn install -DskipTests' from Hadoop source top level once; and then work from the submodule. Keep in mind that SNAPSHOTs time out after a while, using the Maven '-nsu' will stop Maven from trying to update SNAPSHOTs from external repos.
+Go to .../hadoop-2.7.3-src, then
+  $ mvn install -DskipTests
+
+Building distributions:
+
+Create binary distribution without native code and without documentation:
+
+  $ mvn package -Pdist -DskipTests -Dtar
+
+Create binary distribution with native code and with documentation:
+
+  $ mvn package -Pdist,native,docs -DskipTests -Dtar
+
+===========Importing projects to eclipse==========
+(Eclipse can be used to edit java files, and do mvn compile if mvn is installed inside Eclipse. But you can just use maven in linux to compile the modules)
+
+
+Then, generate eclipse project files.
+Go to ~/Projects/hadoop-2.7.3-src, then
+  $ mvn eclipse:eclipse -DskipTests
+
+At last, import to eclipse by specifying the root directory of the project via
+[File] > [Import] > [Existing Projects into Workspace].
